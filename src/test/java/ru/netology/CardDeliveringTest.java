@@ -37,7 +37,15 @@ public class CardDeliveringTest {
         $("[data-test-id='phone']").setValue("+79007777777");
         $("[data-test-id='agreement']").click();
         $("button").click();
-        $(withText(Успешно !)).shoulBe(visible, Duration.ofSeconds(15));
+        $(withText(Успешно!)).shoulBe(visible, Duration.ofSeconds(15));
         $("[data-test-id='agreement']").shoulHave(currentDate);
+    }
+
+    @Test
+    public void shouldCheckNotification() {
+
+        $(".notification__content")
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate), Duration.ofSeconds(15))
+                .shouldBe(Condition.visible);
     }
 }

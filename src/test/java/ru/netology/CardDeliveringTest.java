@@ -3,7 +3,7 @@ package ru.netology;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,7 @@ public class CardDeliveringTest {
         return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
     }
 
-    @Test  // Не могу понять, почему аннотация не подсвечивается.  Уже все подряд импортировала, тест все равно не запускается.
+    @Test
 
     public void shouldPassPositiveTest() {
         open("http://localhost:9999/");
@@ -37,8 +37,8 @@ public class CardDeliveringTest {
         $("[data-test-id='phone']").setValue("+79007777777");
         $("[data-test-id='agreement']").click();
         $("button").click();
-        $(withText(Успешно!)).shoulBe(visible, Duration.ofSeconds(15));
-        $("[data-test-id='agreement']").shoulHave(currentDate);
+        $(withText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
+        $("[data-test-id='agreement']").shouldHave(currentDate);
     }
 
     @Test

@@ -18,8 +18,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import org.openqa.selenium.Keys;
+
 import java.time.Duration;
+
 import com.codeborne.selenide.Condition;
 
 public class CardDeliveringTest {
@@ -41,7 +44,6 @@ public class CardDeliveringTest {
         $("[data-test-id='agreement']").click();
         $("button").click();
         $(withText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
-        $("[data-test-id='agreement']").shouldHave(currentDate);
         $(".notification__content")
                 .shouldHave(Condition.text("Встреча успешно забронирована на " + currentDate), Duration.ofSeconds(15))
                 .shouldBe(Condition.visible);

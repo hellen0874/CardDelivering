@@ -2,13 +2,12 @@ package ru.netology;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
-
+import static com.codeborne.selenide.Selectors.withText;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,11 +16,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import org.openqa.selenium.Keys;
+import java.time.Duration;
+import com.codeborne.selenide.Condition;
 
 public class CardDeliveringTest {
     // Задание 1
-    private String generateDate(int addDays, string pattern) {
+    private String generateDate(int addDays, String pattern) {
         return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
     }
 
@@ -39,13 +42,8 @@ public class CardDeliveringTest {
         $("button").click();
         $(withText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id='agreement']").shouldHave(currentDate);
-    }
-
-    @Test
-    public void shouldCheckNotification() {
-
         $(".notification__content")
-                .shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate), Duration.ofSeconds(15))
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + currentDate), Duration.ofSeconds(15))
                 .shouldBe(Condition.visible);
     }
 }

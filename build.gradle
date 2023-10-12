@@ -13,18 +13,12 @@ compileTestJava.options.encoding = "UTF-8"
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://repo.clojars.org'
-        name 'Clojars'
-    }
 }
 
 dependencies {
-    implementation 'user.java.lang:user.java.lang:2020.164.33984'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     testImplementation 'com.codeborne:selenide:6.17.2'
 }
-
 
 test {
     useJUnitPlatform()

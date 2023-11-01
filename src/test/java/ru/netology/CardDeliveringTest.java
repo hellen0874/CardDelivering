@@ -34,7 +34,7 @@ public class CardDeliveringTest {
     @Test
 
     public void shouldPassPositiveTest() {
-        open("http://localhost:9999/");
+        open("http://localhost:8080/");
         $("[data-test-id='city'] input").setValue("Архангельск");
         String currentDate = generateDate(4, "dd.MM.yyyy");
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
@@ -42,10 +42,10 @@ public class CardDeliveringTest {
         $("[data-test-id='name'] input").setValue("Елена Смирнова-Кузнецова");
         $("[data-test-id='phone'] input").setValue("+79007777777");
         $("[data-test-id='agreement']").click();
-        $("button").click();
+        $("button.button").click();
         $(withText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
         $(".notification__content")
-                .shouldHave(Condition.text("Встреча успешно забронирована на " + currentDate), Duration.ofSeconds(15))
-                .shouldBe(Condition.visible);
+                .shouldBe(Condition.visible, Duration.ofSeconds(15))
+                .shouldHave(Condition.exactText("Встреча успешно забронирована на " + currentDate));
     }
 }

@@ -35,12 +35,12 @@ public class CardDeliveringTest {
 
     public void shouldPassPositiveTest() {
         open("http://localhost:9999/");
-        $("[data-test-id='city']").setValue("Архангельск");
+        $("[data-test-id='city'] input").setValue("Архангельск");
         String currentDate = generateDate(4, "dd.MM.yyyy");
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id='date'] input").sendKeys(currentDate);
-        $("[data-test-id='name']").setValue("Елена Смирнова-Кузнецова");
-        $("[data-test-id='phone']").setValue("+79007777777");
+        $("[data-test-id='name'] input").setValue("Елена Смирнова-Кузнецова");
+        $("[data-test-id='phone'] input").setValue("+79007777777");
         $("[data-test-id='agreement']").click();
         $("button").click();
         $(withText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
